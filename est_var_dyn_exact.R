@@ -137,8 +137,6 @@ est_var_dyn_exact = function(Y,k,start=0,tol=10^-10,maxit=1000,Tau1=NULL,TAU=NUL
 			Taum[i,,1] = Tau1[i,]
 			for(t1 in 2:TT) Taum[i,,t1] = t(TAU[i,,,t1])%*%Taum[i,,t1-1]
 			Taumc[i,,] = pmax(Taum[i,,],10^-300)
-			d1Taum[i,,1,] = diag(k)
-			for(t1 in 2:TT) d1Taum[i,,t1,] = t(TAU[i,,,t1])%*%d1Taum[i,,t1-1,]
 			for(s1 in 2:TT){
 				for(u1 in 1:k) d2Taum[i,,s1,u1,,s1] = Taum[i,u1,s1-1]*diag(k)
 				if(s1<TT) for(t1 in (s1+1):TT) for(u1 in 1:k) d2Taum[i,,t1,u1,,s1] = t(TAU[i,,,t1])%*%d2Taum[i,,t1-1,u1,,s1]
